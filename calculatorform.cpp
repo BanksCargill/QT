@@ -61,13 +61,36 @@ CalculatorForm::CalculatorForm(QWidget *parent)
 //! [1]
 void CalculatorForm::on_inputSpinBox1_valueChanged(int value)
 {
-    ui.outputWidget->setText(QString::number(value + ui.inputSpinBox2->value()));
+    if (m_subtraction){
+            ui.outputWidget->setText(QString::number(value - ui.inputSpinBox2->value()));
+    }
+    else if (m_addition) {
+        ui.outputWidget->setText(QString::number(value + ui.inputSpinBox2->value()));
+    }
 }
 //! [1]
 
 //! [2]
 void CalculatorForm::on_inputSpinBox2_valueChanged(int value)
 {
-    ui.outputWidget->setText(QString::number(value + ui.inputSpinBox1->value()));
-}
+    if (m_subtraction){
+            ui.outputWidget->setText(QString::number(ui.inputSpinBox1->value() - value));
+    }
+    else if (m_addition) {
+        ui.outputWidget->setText(QString::number(ui.inputSpinBox1->value() + value));
+    }}
 //! [2]
+
+void CalculatorForm::on_subtraction_clicked()
+{
+    m_subtraction = true;
+    m_addition = false;
+    ui.outputWidget->setText(QString::number(ui.inputSpinBox1->value()- ui.inputSpinBox2->value()));
+}
+
+void CalculatorForm::on_addition_clicked()
+{
+    m_subtraction = false;
+    m_addition = true;
+    ui.outputWidget->setText(QString::number(ui.inputSpinBox1->value() + ui.inputSpinBox2->value()));
+}
