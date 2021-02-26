@@ -66,9 +66,13 @@ public:
 private slots:
     void on_inputSpinBox1_valueChanged(int value);
     void on_inputSpinBox2_valueChanged(int value);
+    void on_subtraction_clicked();
+    void on_addition_clicked();
 
 private:
     Ui::CalculatorForm ui;
+    bool m_subtraction = false;
+    bool m_addition = true;
 };
 //! [1]
 
