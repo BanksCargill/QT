@@ -67,8 +67,14 @@ private slots:
     void on_inputSpinBox1_valueChanged(int value);
     void on_inputSpinBox2_valueChanged(int value);
 
+    void on_multiply_clicked(bool clicked);
+
+    void on_divide_clicked(bool clicked);
+
 private:
     Ui::CalculatorForm ui;
+    bool m_multiply = false;
+    bool m_divide = false;
 };
 //! [1]
 

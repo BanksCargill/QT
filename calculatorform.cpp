@@ -61,13 +61,45 @@ CalculatorForm::CalculatorForm(QWidget *parent)
 //! [1]
 void CalculatorForm::on_inputSpinBox1_valueChanged(int value)
 {
-    ui.outputWidget->setText(QString::number(value + ui.inputSpinBox2->value()));
+    if (m_multiply) {
+        ui.outputWidget->setText(QString::number(value * ui.inputSpinBox2->value()));
+    } else if (m_divide) {
+        ui.outputWidget->setText(QString::number(value / ui.inputSpinBox2->value()));
+    }
+
 }
 //! [1]
 
 //! [2]
 void CalculatorForm::on_inputSpinBox2_valueChanged(int value)
 {
-    ui.outputWidget->setText(QString::number(value + ui.inputSpinBox1->value()));
+    if (m_multiply) {
+        ui.outputWidget->setText(QString::number(value * ui.inputSpinBox1->value()));
+    } else if (m_divide) {
+        ui.outputWidget->setText(QString::number(value / ui.inputSpinBox1->value()));
+    }
 }
 //! [2]
+
+void CalculatorForm::on_multiply_clicked(bool clicked)
+{
+    if (clicked) {
+        m_multiply = true;
+        ui.outputWidget->setText(QString::number(ui.inputSpinBox1->value() * ui.inputSpinBox2->value()));
+        emit on_divide_clicked(false);
+    } else {
+        m_multiply = false;
+    }
+}
+
+void CalculatorForm::on_divide_clicked(bool clicked)
+{
+    if (clicked) {
+        m_divide = true;
+        ui.outputWidget->setText(QString::number(ui.inputSpinBox1->value() / ui.inputSpinBox2->value()));
+        emit on_multiply_clicked(false);
+    } else {
+        m_divide = false;
+    }
+
+}
